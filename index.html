@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testando API</title>
+    <script>
+        async function fetchMessages() {
+            const response = await fetch('http://localhost:3000/falas');
+            const data = await response.json();
+            const list = document.getElementById('messageList');
+            list.innerHTML = '';
+            data.vetor.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `Mensagem: ${item.mensagem} (Número: ${item.numero})`;
+                list.appendChild(li);
+            });
+        }
+
+        async function addMessage() {
+            const mensagemInput = document.getElementById('mensagemInput').value;
+            await fetch('http://localhost:3000/falas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensagem: mensagemInput })
+            });
+            fetchMessages();
+            document.getElementById('mensagemInput').value = ''; // Limpa o campo de entrada
+        }
+
+        async function deleteMessage() {
+            const numeroInput = document.getElementById('numeroDeleteInput').value;
+            await fetch('http://localhost:3000/falas', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numero: Number(numeroInput) })
+            });
+            fetchMessages();
+            document.getElementById('numeroDeleteInput').value = ''; // Limpa o campo de entrada
+        }
+
+        async function updateMessage() {
+            const numeroInput = document.getElementById('numeroUpdateInput').value;
+            const mensagemInput = document.getElementById('mensagemUpdateInput').value;
+            await fetch('http://localhost:3000/falas', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numero: Number(numeroInput), mensagem: mensagemInput })
+            });
+            fetchMessages();
+            document.getElementById('numeroUpdateInput').value = ''; // Limpa o campo de entrada
+            document.getElementById('mensagemUpdateInput').value = ''; // Limpa o campo de entrada
+        }
+    </script>
+</head>
+<body>
+    <h1>Testando API</h1>
+    
+    <h2>Mensagens</h2>
+    <ul id="messageList"></ul>
+
+    <h2>Adicionar Mensagem</h2>
+    <input type="text" id="mensagemInput" placeholder="Digite a mensagem">
+    <button onclick="addMessage()">Adicionar</button>
+
+    <h2>Deletar Mensagem</h2>
+    <input type="number" id="numeroDeleteInput" placeholder="Número da mensagem">
+    <button onclick="deleteMessage()">Deletar</button>
+
+    <h2>Atualizar Mensagem</h2>
+    <input type="number" id="numeroUpdateInput" placeholder="Número da mensagem">
+    <input type="text" id="mensagemUpdateInput" placeholder="Nova mensagem">
+    <button onclick="updateMessage()">Atualizar</button>
+
+    <script>
+        fetchMessages(); // Chama a função para carregar mensagens ao iniciar
+    </script>
+</body>
+</html>
