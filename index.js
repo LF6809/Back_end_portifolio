@@ -58,12 +58,12 @@ app.get('/produtos', (req, res) => {
 
 })
 
-app.delete('/produtos', (req, res) =>{
- const numero = req.body.numero
- vetor.splice(numero, 1)
- console.log(vetor)
- res.status(201).json({ mensagem: 'funfo o delete' })
-})
+app.delete('/produtos', (req,res) => {
+    const {cartao} = req.body;
+    cartoes.splice(cartao, 1);
+    console.log(cartao + 'deletado');
+    res.status(201).json({mensagem: 'funfo o delete' + cartao});
+});
 
 app.put('/produtos', (req, res) => {
     const numero = req.body.numero
