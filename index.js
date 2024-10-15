@@ -16,7 +16,7 @@ app.use(express.json());
     //{mensagem: 'hello', numero: 3 },
 //]
 
-let produtos = [
+let cartoes = [
    {
        nome: 'cordas 1',
         valor: 'R$48,89',
@@ -47,13 +47,13 @@ let produtos = [
 app.post('/produtos', (req, res) => {
     const{nome , valor , imagem} = req.body;
 
-    produtos.push({nome: nome, valor: valor, imagem: imagem});
-    console.log(produtos);
+    cartoes.push({nome: nome, valor: valor, imagem: imagem});
+    console.log(cartoes);
     res.status(201).json({ mensagem: 'funfo' });
 });
 
 app.get('/produtos', (req, res) => {
-    res.status(200).json({ produtos });
+    res.status(200).json({ cartoes });
     console.log('oi');
 
 })
@@ -66,9 +66,8 @@ app.delete('/produtos', (req,res) => {
 });
 
 app.put('/produtos', (req, res) => {
-    const numero = req.body.numero
-    const mensagem = req.body.mensagem
-    vetor[numero].mensagem = mensagem
+    const {nome, valor, imagem, id} = req.body;
+    cartoes[id] = {nome: nome, valor: valor, imagem: imagem };
     console.log(vetor)
     res.status(201).json({ mensagem: 'funfo o put' })
 })
