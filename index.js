@@ -47,6 +47,8 @@ let cartoes = [
 app.post('/produtos', (req, res) => {
     const{nome , valor , imagem} = req.body;
 
+    
+    
     cartoes.push({nome: nome, valor: valor, imagem: imagem});
     console.log(cartoes);
     res.status(201).json({ mensagem: 'funfo' });
