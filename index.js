@@ -48,7 +48,7 @@ app.post('/produtos', (req, res) => {
     const{nome , valor , imagem} = req.body;
 
     
-    
+
     cartoes.push({nome: nome, valor: valor, imagem: imagem});
     console.log(cartoes);
     res.status(201).json({ mensagem: 'funfo' });
@@ -68,9 +68,8 @@ app.delete('/produtos', (req,res) => {
 });
 
 app.put('/produtos', (req, res) => {
-    const {nome, valor, imagem, id} = req.body;
-    cartoes[id] = {nome: nome, valor: valor, imagem: imagem };
-    console.log(vetor)
+    const {nome, valor, imagem, id,} = req.body;
+    cartoes[id] = {nome: nome, valor: valor, imagem: imagem};
     res.status(201).json({ mensagem: 'funfo o put' })
 })
 
