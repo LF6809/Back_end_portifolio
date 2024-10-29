@@ -18,12 +18,11 @@ const config = {
 
 
 const serviceAccount = require("./ChaveFireBase.json");
-const e = require('express');
 
 
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(config),
 });
 
 const bd = admin.firestore();
