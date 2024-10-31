@@ -18,7 +18,7 @@ const config = {
   
 
 
-const serviceAccount = require("../ChaveFireBase.json");
+// const serviceAccount = require("../bdtestep-firebase-adminsdk-503ee-e9aab94283.json");
 
 
 
